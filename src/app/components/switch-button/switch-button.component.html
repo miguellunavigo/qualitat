@@ -1,0 +1,8 @@
+<ion-segment (ionChange)="segmentChanged($event.detail.value)" mode="ios" color="primary">
+  <ion-segment-button [id]="firstSegment.value" class="left-selector" mode="ios" checked [value]="firstSegment.value">
+    <ion-label>{{ firstSegment.label }}</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [id]="secondSegment.value" class="right-selector" mode="ios" [value]="secondSegment.value">
+    <ion-label>{{ secondSegment.label }}</ion-label>
+  </ion-segment-button>
+</ion-segment>

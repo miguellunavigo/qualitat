@@ -1,0 +1,10 @@
+export const SCREEN_WIDTH = {
+    DESKTOP: 1023,
+    TABLET: 769,
+    //MOBILE: 481,
+    MOBILE: 7690,
+  };
+  
+  export const IDLE_WARNING_TIMEOUT = 1800; //// TIEMPO EN SEGUNDOS PARA CERRAR EL APP
+  export const IDLE_EXIT_AFTER_WARNING_TIMEOUT = 1850;
+  export const MOBILE_BREAKPOINT = 768;

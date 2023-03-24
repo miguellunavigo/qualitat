@@ -1,0 +1,40 @@
+<link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+<ion-content no-bounce>            
+  <div class="login-view">
+
+    <div class="login-logo"></div>
+    <div class="login-bienvenida">
+      <div>Hola!</div>
+      <div>Bienvenid@ a <span>Qualität v.7.0</span></div>    
+    </div>
+    <div class="login-flechas"></div>
+    
+    <div class="login-container-inputs">
+      <form [formGroup]="loginForm">
+        <div class="input-user">
+          <img class="img-user"/>
+          <input type="text" name="usuario" [placeholder]="usuarioPlaceholder" formControlName="usuario" maxlength="10" autocomplete="false"/>
+        </div>
+
+        <div class="input-password">
+          <img class="img-password"/>
+          <input type="password" name="password" [placeholder]="contraseniaPlaceholder" formControlName="password" (keyup)="changepassword($event)"  autocomplete="false"/>
+        </div>
+        <div *ngIf="errorLogin" class="span-error-password">
+          <span>Usuario y/o Password incorrectos</span>
+        </div>
+        <div class="input-perfiles" *ngIf="validateProfile()">
+          <img class="img-user"/>
+          <select formControlName="idprofile">
+            <option value="">Seleccionar</option>
+            <option *ngFor="let item of listProfile" [value]="item.idPerfil">{{item.vnombrePerfil}}</option>
+          </select>
+        </div>
+      </form>
+      <button type="button" class="input-button" [disabled]="loginButtonDisabled || loginForm.invalid || !isSignedIn.isLoaded" (click)="signIn(loginForm.value)" block>      
+        Iniciar sesión
+      </button>    
+    </div>
+
+  </div>
+</ion-content> 

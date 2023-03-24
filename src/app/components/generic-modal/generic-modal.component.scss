@@ -1,0 +1,63 @@
+.title {
+  font-size: 13.5px;
+  text-align: center;
+  padding: 61px 0 0;
+}
+
+.title-bold {
+  font-weight: 600;
+}
+
+.title-purple {
+  color: var(--color-blue);
+  font-weight: 600;
+}
+
+.message { min-width: 240px; }
+
+.i-happy-face{
+  background-size: contain;
+  width: 139px;
+  height: 118px;
+  margin: 0 auto;
+  //background-image: url(../../../assets/icons/i-happy-face.svg);
+  &.title{
+    padding: 90px 0 0;
+    margin-bottom: 16px;
+  }
+}
+
+.modal-close { margin-top: env(safe-area-inset-top); }
+
+.without-icon { 
+  padding-top: 0; 
+  color: var(--color-pink);
+  font: 13px var(--ion-font-family-semibold);
+}
+.paddingOff{
+  padding: 0;
+}
+
+.boton_cancelar{
+     background-color: #f4f0f9 !important;
+}
+
+.modal{
+  background: transparent;
+}
+
+.ion-modal{
+  --background: none ;
+}
+
+.close-sesion {
+  background-color: white;
+  color: var(--color-blue) !important;
+  border: solid 2px var(--color-blue) !important;
+  float: right;
+}
+
+.direction-button {
+  flex-direction: row !important;
+}
+

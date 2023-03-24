@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "54992857958",
+    "firebase_url": "https://hbk-dev.firebaseio.com",
+    "project_id": "hbk-dev",
+    "storage_bucket": "hbk-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54992857958:android:f79bf139c5237edc4236a7",
+        "android_client_info": {
+          "package_name": "com.qualitat.genesis.vehicular"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54992857958-sbii0ua501s9vq8eut31ml6d2b32uh73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc2N6CZM7OiCI9bexIlosZ-pIZGCDUKd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54992857958-sbii0ua501s9vq8eut31ml6d2b32uh73.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "54992857958-od3vi58cf8n96losaj69lu7ph7drc7k0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.qualitat.genesis.vehicular"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

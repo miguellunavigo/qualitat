@@ -1,0 +1,13 @@
+<ion-backdrop *ngIf="isActiveModal" class="backdrop" [tappable]="enableBackdropDismiss" [class.slide-out-backdrop]="fadeOut"></ion-backdrop>
+<button class="modal-close i-close" (click)="dismissModal()" *ngIf="showCloseButton"></button>
+
+<div class="modal">
+  <div class="scrollable-content">
+    <div class="title {{extraClass}}" [innerHTML]="title" [ngClass]="icon"></div>
+    <div class="message" [innerHTML]="message"></div>
+    <div class="buttons-container {{extraClass1}}">
+      <button class="brand-button primary" *ngIf="primaryButtonText" [class.fill]="!secondaryButtonText" (click)="onPrimaryClick()">{{primaryButtonText}}</button>
+      <button #secondButton class="brand-button secondary {{extraClass2}}" (click)="onSecondaryClick()" *ngIf="secondaryButtonText">{{secondaryButtonText}}</button>
+    </div>
+  </div>
+</div>

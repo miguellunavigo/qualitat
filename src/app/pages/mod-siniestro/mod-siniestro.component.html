@@ -1,0 +1,999 @@
+<ion-content>
+  <div class="mobile-header">
+    <div class="mobile-sub-header">
+      <div class="mobile-sub-header-back">
+        <button slot="start" class="i-back" (click)="goBack()">
+        </button>
+      </div>
+      <div class="mobile-sub-header-title">
+        <span>Siniestro Nro: {{selectSiniestro.idsiniestro_ou}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="page mobile-body">
+    <div class="container-tabs">
+      <div class="tabs active" [class.no-active]="!evaluarActivo(1)" (click)="establecerActivo(1)">Datos Generales</div>
+      <div class="tabs no-active" [class.no-active]="!evaluarActivo(2)" (click)="establecerActivo(2)">Coberturas</div>
+      <div class="tabs no-active" [class.no-active]="!evaluarActivo(3)" (click)="establecerActivo(3)">Procuración</div>
+    </div>
+    <div class="container-tabs-body">
+      <div class="tab-body-1" *ngIf="evaluarActivo(1)">
+        <form [formGroup]="tab1Form">
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Póliza<span class="text-danger">*</span></label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.idpoliza"  formControlName="idpoliza">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Placa</label>
+              <input type="text" class="form-control" [(ngModel)]="selectSiniestro.placa" formControlName="placa"
+                readonly="true">
+            </div>
+            <div class="margin-top col-md-6 col-sm-6 inline">
+              <label for="plaque" class="form-label">Vigencia</label>
+              <input type="text" class="form-control"  [(ngModel)]="selectSiniestro.vigencia" formControlName="vigencia" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline" >
+              <label for="plaque" class="form-label">Plan</label>
+              <input type="text" class="form-control"  [(ngModel)]="selectSiniestro.planPoliza" formControlName="planPoliza" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Asig. Asesor</label>
+              <select [readonly]="!isEdit" class="form-control" formControlName="nidusuario" [(ngModel)]="selectSiniestro.nidusuario" [attr.disabled]="disabled">
+                <option *ngFor="let item of listAsesores" [value]="item.nidUsuario">{{item.nombresusu}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Estado Póliza</label>
+              <input type="text" class="form-control" [(ngModel)]="selectSiniestro.estadopoliza" formControlName="estadopoliza" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+
+
+              <label for="iestadosiniestro" class="form-label">Estado Siniestro<span class="text-danger">*</span></label>
+              <!-- <select class="form-control" formControlName="iestadosiniestro"
+                [(ngModel)]="selectSiniestro.iestadosiniestro" (change)="onSelected(teams.value)"> -->
+                <select [readonly]="!isEdit" class="form-control" formControlName="iestadosiniestro"
+                [(ngModel)]="selectSiniestro.iestadosiniestro" (change)="onSelected(teams.value)">
+                <option *ngFor="let item of listEstadoSiniestro" [value]="item.smiddetalle">{{item.vdescripcion}}
+                </option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label"></label>
+              <input class="form-control" formControlName="dFecCambioEstado" value="{{ selectSiniestro.dFecCambioEstado | date: 'dd/MM/yyyy' }}" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dUser" class="form-label">Aprueba</label>
+              <input type="text" class="form-control" formControlName="dUser" readonly="true" [(ngModel)]="selectSiniestro.dUser">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dFecNotificacion" class="form-label">Notificación<span class="text-danger">*</span></label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-modal1" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dFecNotificacion | date:'dd/MM/yyyy HH:mm'}}">
+                </ion-item>
+                <ion-modal trigger="open-modal1" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dFecNotificacion" formControlName="dFecNotificacion"size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+
+
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Registro</label>
+              <input type="text" class="form-control" formControlName="dFecRegistro" value="{{ selectSiniestro.dFecRegistro | date: 'dd/MM/yyyy HH:mm' }}" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Modificación</label>
+              <input type="text" class="form-control" formControlName="dFecModificacion" value="{{ selectSiniestro.dFecModificacion | date: 'dd/MM/yyyy HH:mm' }}" readonly="true" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Gravedad<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="idgravedad" [(ngModel)]="selectSiniestro.idgravedad">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listGravedad" [value]="item.value">{{item.description}}</option>
+              </select>
+            </div>
+
+
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Lesionados</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="iocupantes"  [(ngModel)]="selectSiniestro.iocupantes">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Fec. Ocurrencia<span class="text-danger">*</span></label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-modal2" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dFecOcurrencia | date:'dd/MM/yyyy HH:mm'}}" [style.border]="!tab1Form.controls.dFecOcurrencia.valid ? '1px solid red' : '1px solid #babfc7'">
+                </ion-item>
+                <ion-modal trigger="open-modal2" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dFecOcurrencia" formControlName="dFecOcurrencia" size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Causa</label>
+              <select class="form-control" formControlName="smcausa" [(ngModel)]="selectSiniestro.smcausa"
+                (ngModelChange)="getDetalleCausa($event)">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listCausa" [value]="item.smcausa">{{item.vdescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Detalle Causa</label>
+              <select class="form-control" formControlName="idetallecausa" [(ngModel)]="selectSiniestro.idetallecausa">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listDetalleCausa" [value]="item.idetallecausa">{{item.vdescripcion}}
+                </option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Consecuencia</label>
+              <select class="form-control" formControlName="idconsecuencia"
+                [(ngModel)]="selectSiniestro.idconsecuencia">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listConsecuencia" [value]="item.idConsecuencia">{{item.vDescripcion}}
+                </option>
+              </select>
+            </div>
+            <div class="margin-top col-md-6 col-sm-6 inline">
+              <label for="plaque" class="form-label">Lugar<span class="text-danger">*</span></label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vlugarsiniestro" [(ngModel)]="selectSiniestro.vlugarsiniestro" [style.border]="!tab1Form.controls.vlugarsiniestro.valid ? '1px solid red' : '1px solid #babfc7'">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Ubigeo<span class="text-danger">*</span></label>
+              <input type="hidden" [(ngModel)]="selectSiniestro.smidubigeo" formControlName="smidubigeo">
+              <input [readonly]="!isEdit" type="text" class="form-control" autocomplete="off" (keyup)="getUbigeo($event)" (blur)="onBlurUbigeo()" [(ngModel)]="selectSiniestro.vdescripcionubi" formControlName="vdescripcionubi" [readonly]="!isEdit" [style.border]="!tab1Form.controls.smidubigeo.valid ? '1px solid red' : '1px solid #babfc7'">
+              <ion-list *ngIf="vubigeolist" class="ion-list-custom">
+                <ion-item *ngFor="let item of ubigeo" tappable (click)="setUbigeo(item)">
+                  {{ item.vdescripcion }}
+                </ion-item>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Analista<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="idanalista" [(ngModel)]="selectSiniestro.idanalista" [style.border]="!tab1Form.controls.idanalista.valid ? '1px solid red' : '1px solid #babfc7'">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listAnalista" [value]="item.nidUsuario">{{item.nombresusu}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Conv. GxG</label>
+              <select class="form-control" formControlName="idaseguradora" [(ngModel)]="selectSiniestro.idaseguradora">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listAseguradora" [value]="item.smidciaseguros">{{item.vdescripcion}}
+                </option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Semáforo<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="idsemaforo" [(ngModel)]="selectDatoSiniestro.idsemaforo" [style.border]="!tab1Form.controls.idsemaforo.valid ? '1px solid red' : '1px solid #babfc7'">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listSemaforo" [value]="item.value">{{item.description}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Declarante -->
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Tipo Declarante</label>
+              <select class="form-control" formControlName="idtipo_decla" [(ngModel)]="selectSiniestro.idtipo_decla">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listTipoDeclarante" [value]="item.idTipoDeclarante">{{item.vDescripcion}}
+                </option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Tipo Documento<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="idtipo_docid_decla" [(ngModel)]="selectSiniestro.idtipo_docid_decla" [style.border]="!tab1Form.controls.idtipo_docid_decla.valid ? '1px solid red' : '1px solid #babfc7'">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listTipoDocumento" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nro. Documento<span class="text-danger">*</span></label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="idnrodoc_decla"  [(ngModel)]="selectSiniestro.idnrodoc_decla" readonly="true" [style.border]="!tab1Form.controls.idnrodoc_decla.valid ? '1px solid red' : '1px solid #babfc7'">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Apellido Paterno</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vapellidopat_decla"  [(ngModel)]="selectSiniestro.vapellidopat_decla" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Apellido Materno</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vapellidomat_decla"  [(ngModel)]="selectSiniestro.vapellidomat_decla" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nombre(s)</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vnombres_decla"  [(ngModel)]="selectSiniestro.vnombres_decla" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Parentesco</label>
+              <select class="form-control" formControlName="iparentaseg_declarante"
+                [(ngModel)]="selectSiniestro.iparentaseg_declarante">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listParentesco" [value]="item.idParentesco">{{item.vDescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Correo</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vmaildeclarante"  [(ngModel)]="selectSiniestro.vmaildeclarante">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Teléfono</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vtelef_declarante"  [(ngModel)]="selectSiniestro.vtelef_declarante">
+            </div>
+          </div>
+
+
+          <!-- Conductor -->
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Tipo Conductor</label>
+              <select class="form-control" formControlName="idtipo_conduc" [(ngModel)]="selectSiniestro.idtipo_conduc">
+                <option value="0" selected>SELECCIONAR</option>
+                <option value="1">ASEGURADO</option>
+                <option value="2">OTROS</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Tipo Documento</label>
+              <select class="form-control" formControlName="idtipo_docid_conduc"
+                [(ngModel)]="selectSiniestro.idtipo_docid_conduc">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listTipoDocumento" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nro. Documento</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="idnrodoc_conduc"  [(ngModel)]="selectSiniestro.idnrodoc_conduc" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Apellido Paterno</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vapellidopat_conduc"  [(ngModel)]="selectSiniestro.vapellidopat_conduc" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Apellido Materno</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vapellidomat_conduc"  [(ngModel)]="selectSiniestro.vapellidomat_conduc" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nombre(s)</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vnombres_conduc"  [(ngModel)]="selectSiniestro.vnombres_conduc" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Parentesco</label>
+              <select class="form-control" formControlName="iparentaseg_conductor"
+                [(ngModel)]="selectSiniestro.iparentaseg_conductor">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listParentesco" [value]="item.idParentesco">{{item.vDescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Correo</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vemail_conductor"  [(ngModel)]="selectSiniestro.vemail_conductor">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Teléfono</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vtelef_conductor"  [(ngModel)]="selectSiniestro.vtelef_conductor">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Licencia</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vlicencia"  [(ngModel)]="selectSiniestro.vlicencia">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Venc. Licencia</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-modal3" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dvencilicencia | date:'dd/MM/yyyy'}}">
+                </ion-item>
+                <ion-modal trigger="open-modal3" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dvencilicencia" formControlName="dvencilicencia" size="cover" [showDefaultButtons]="true" max="{{svencilicenciaMaxDate}}"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+              <!-- <input id="dateFecVencimiento" type="text" class="form-control" formControlName="dvencilicencia" value="{{ selectSiniestro.dvencilicencia | date: 'dd/MM/yyyy' }}">
+              <ion-item>
+                <ion-popover trigger="dateFecVencimiento" size="cover">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dvencilicencia" formControlName="dvencilicencia" displayFormat='DD/MM/YYYY' (ionChange)="doSomething($event)" locale="es-PE"></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item> -->
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Categoría</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vcategoria"  [(ngModel)]="selectSiniestro.vcategoria">
+            </div>
+          </div>
+
+          <!-- Comisaria -->
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Comisaria</label>          
+              <input type="hidden" [(ngModel)]="selectSiniestro.idcomisaria" formControlName="idcomisaria">
+              <input [readonly]="!isEdit" type="text" class="form-control" autocomplete="off" (keyup)="getComisaria($event)" (blur)="onBlurComisaria()" [(ngModel)]="selectSiniestro.descomisaria" formControlName="vdescripcioncomi" [readonly]="!isEdit" [style.border]="!tab1Form.controls.idcomisaria.valid ? '1px solid red' : '1px solid #babfc7'">
+              <ion-list *ngIf="vcomisarialist" class="ion-list-custom">
+                <ion-item *ngFor="let item of listComisaria" tappable (click)="setComisaria(item)">
+                  {{ item.vdescripcion }} - {{ item.vdireccion }}
+                </ion-item>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Denuncia Policial</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-modal4" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dFecDenunciaP | date:'dd/MM/yyyy HH:mm'}}" [style.border]="!tab1Form.controls.dFecDenunciaP.valid ? '1px solid red' : '1px solid #babfc7'">
+                </ion-item>
+                <ion-modal trigger="open-modal4" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dFecDenunciaP" formControlName="dFecDenunciaP" size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-6 col-sm-6 inline">
+              <label for="plaque" class="form-label">Detalle Siniestro<span class="text-danger">*</span></label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="vdetasiniestro" [(ngModel)]="selectSiniestro.vdetasiniestro" [style.border]="!tab1Form.controls.vdetasiniestro.valid ? '1px solid red' : '1px solid #babfc7'">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Contratante</label>
+              <input type="text" class="form-control" formControlName="Persona" [(ngModel)]="selectSiniestro.Persona" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Clase Vehículo</label>
+              <input type="text" class="form-control" formControlName="Clase" [(ngModel)]="selectSiniestro.Clase" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Marca</label>
+              <input class="form-control" formControlName="Marca" [(ngModel)]="selectSiniestro.Marca" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Modelo</label>
+              <input class="form-control" formControlName="Modelo" [(ngModel)]="selectSiniestro.Modelo" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">VIN</label>
+              <input type="text" class="form-control" formControlName="Vin" [(ngModel)]="selectSiniestro.Vin" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Año</label>
+              <input type="text" class="form-control" formControlName="Anio" [(ngModel)]="selectSiniestro.Anio" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Uso</label>
+              <input type="text" class="form-control" formControlName="Uso" [(ngModel)]="selectSiniestro.Uso" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nro. Asientos</label>
+              <input type="text" class="form-control" formControlName="Asientos" [(ngModel)]="selectSiniestro.Asientos"readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Km. Recorrido</label>
+              <input type="text" class="form-control" formControlName="Kilometraje" [(ngModel)]="selectSiniestro.Kilometraje" readonly="true">
+            </div>
+          </div>
+          <div class="row">
+            <!-- -->
+            <button type="button" class="input-button" (click)="actualizartab1()" *ngIf="isEdit">
+              Actualizar
+            </button>
+            <button type="button" class="input-button" (click)="reportePDF()">
+              Reporte PDF
+            </button>
+            <button type="button" class="input-button" (click)="cerrartab1(tab1Form.value)">
+              Cerrar
+            </button>
+          </div>
+
+        </form>
+      </div>
+      <div class="tab-body-2" *ngIf="evaluarActivo(2)">
+        <form [formGroup]="tab2Form">
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Analista</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.analista" formControlName="analista" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nro. Asientos</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.Asientos" formControlName="Asientos" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Nro. de Lesionados</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.iocupantes" formControlName="iocupantes" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Causa</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.smcausades" formControlName="smcausades" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Detalle Causa</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" [(ngModel)]="selectSiniestro.iddetalledes" formControlName="iddetalledes" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline" style="top: 20px;">
+              <button class="form-control mobile-button-edit" (click)="cerrartab1(tab1Form.value)">
+                Cerrar
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div style="width: 100%;">
+              <table>
+                <tbody>
+                  <tr *ngFor="let item of listCobertura">
+                    <td>
+
+                      <div class="mobile-table">
+                        <div class="container-texto">
+                          <div class="container-siniestro">
+                            <div class="titulo">Cobertura General:</div>
+                            <div class="descripcion">{{ item.coberturageneral}}</div>
+                          </div>
+
+                          <div class="row">
+                            <div class="row-td-1">
+                              <div class="titulo">Suma Asegurada:</div>
+                              <div class="descripcion">{{item.sumaAsegurada}}</div>
+                            </div>
+                            <div class="row-td-1">
+                              <div class="titulo">Saldo Reserva:</div>
+                              <div class="descripcion">{{item.saldoreserva}}</div>
+                            </div>
+                            <div class="row-td-1">
+                              <div class="titulo">Total Deducible:</div>
+                              <div class="descripcion">{{item.deducible}}</div>
+                            </div>
+                            <div class="row-td-1">
+                              <div class="titulo">Vehículo / Persona:</div>
+                              <div class="descripcion">{{item.persona}}</div>
+                            </div>
+                            <div class="row-td-1">
+                              <div class="titulo">Estado:</div>
+                              <div class="descripcion">{{item.estado}}</div>
+                            </div>
+                            <div class="row-td-1">
+                              <div class="titulo">Fec. Registro:</div>
+                              <div class="descripcion">{{item.dtfecregistro}}</div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div style="text-align: center">
+                          <button type="button" class="mobile-button-ver">Ver</button>
+                          <button type="button" class="mobile-button-edit">Editar</button>
+                          <button type="button" class="mobile-button-edit">Rechazar</button>
+                        </div>
+
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <button class="input-button" (click)="NuevaCobertura()" *ngIf="isEdit" >
+              Nueva COB
+            </button>
+            <button class="input-button" (click)="NuevaOT()" [disabled]="disabledNuevaOT">
+              OT
+            </button>
+            <button class="input-button" (click)="NuevaCG()">
+              CG
+            </button>
+            <button class="input-button" (click)="VerReserva()">
+              Reserva
+            </button>
+            <button class="input-button" (click)="AjusteReserva()">
+              Ajuste de Reserva
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="tab-body-3" *ngIf="evaluarActivo(3)">
+        <form [formGroup]="tab3Form">
+          <div class="row">
+            <div class="margin-top col-md-12 col-sm-12">
+              <label for="plaque" class="form-label">Información de los hechos</label>
+              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.hechosSiniestros" formControlName="hechosSiniestros" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="margin-top col-md-12 col-sm-12">
+              <label for="plaque" class="form-label">Apreciación</label>
+              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.apreciacionSiniestros" formControlName="apreciacionSiniestros" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dfechaReporteProc" class="form-label">Fecha Reporte</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-dfechaReporteProc" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaReporteProc | date:'dd/MM/yyyy HH:mm'}}">
+                </ion-item>
+                <ion-modal trigger="open-dfechaReporteProc" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dfechaReporteProc" formControlName="dfechaReporteProc" size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dfechaInicioProc" class="form-label">Fecha Inicio</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-dfechaInicioProc" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaInicioProc | date:'dd/MM/yyyy HH:mm'}}">
+                </ion-item>
+                <ion-modal trigger="open-dfechaInicioProc" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dfechaInicioProc" formControlName="dfechaInicioProc" size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dfechaFinProc" class="form-label">Fecha Fin</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-dfechaFinProc" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaFinProc | date:'dd/MM/yyyy HH:mm'}}">
+                </ion-item>
+                <ion-modal trigger="open-dfechaFinProc" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dfechaFinProc" formControlName="dfechaFinProc" size="cover" [showDefaultButtons]="true"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="dfechaAsignacion" class="form-label">Fecha Asignación</label>
+              <ion-list class="container-text-date">
+                <ion-item id="open-dfechaAsignacion" lines="none">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaAsignacion | date:'dd/MM/yyyy HH:mm'}}">
+                </ion-item>
+                <ion-modal trigger="open-dfechaAsignacion" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime [(ngModel)]="selectSiniestro.dfechaAsignacion" formControlName="dfechaAsignacion" size="cover" [showDefaultButtons]="true"
+                      [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Procurador</label>
+              <select class="form-control" formControlName="idprocurador" [(ngModel)]="selectSiniestro.idprocurador">
+                <option *ngFor="let item of listAsesores" [value]="item.nidUsuario">{{item.nombresusu}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Tipo Asesoria</label>
+              <select class="form-control" formControlName="dtipoasesoria" [(ngModel)]="selectSiniestro.dtipoasesoria">
+                <option value="">SELECCIONAR</option>
+                <option *ngFor="let item of listTipoAsesoria" [value]="item.value">{{item.description}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="plaque" class="form-label">Kilometraje</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" formControlName="dkilometraje" [(ngModel)]="selectSiniestro.dkilometraje">
+            </div>
+          </div>
+
+          <div class="row">
+            <button type="button"class="input-button" (click)="actualizartab3()" *ngIf="isEdit" >
+              Actualizar
+            </button>
+            <button type="button" class="input-button" (click)="PDFProcuracion()">
+              Reporte de Procuración
+            </button>
+          </div>
+
+          <div class="row" style="margin-bottom: 16px;" *ngIf="isEdit" >
+            <div class="margin-top col-md-6 col-sm-6">
+              <label for="plaque" class="form-label">Ingresa Nombre Sección</label>
+              <input [readonly]="!isEdit" type="text" class="form-control" rows="2" [(ngModel)]="selectSiniestro.descripcionseccion"  formControlName="descripcionseccion">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3">
+              <button type="button" (click)="agregarSeccion()" class="btn-upload">Guardar Sección</button>
+            </div>
+          </div>
+
+          <div *ngFor="let item of listSeccionProcuracion" class="container-seccion">
+            <div (click)="establecerActivoSeccion(item.idseccion)"style="text-align: center;padding-top: 15px;padding-bottom: 15px">
+              {{item.nombre}}
+            </div>
+
+            <div *ngIf="evaluarActivoSeccion(item.idseccion)">
+              <div class="row"  *ngIf="isEdit" >
+                <div class="margin-top col-md-3 col-sm-3">                  
+                  <div class="i-icon-camera" (click)="fileInputCam.click()">
+
+                  </div>
+                  <div class="i-icon-folder" (click)="fileInputFolder.click()">
+
+                  </div>
+                  
+                  <input type="file" #fileInputCam  id="fileInputCam" name="fileInputCam" style="display:none;" accept="image/*" capture="user" (change)="selectFile($event)">
+
+                  <input type="file" #fileInputFolder  id="fileInputFolder" name="fileInputFolder" style="display:none;" (change)="selectFile($event)">
+
+                </div>
+                <div class="margin-top col-md-6 col-sm-6">
+                  <label for="plaque" class="form-label">Ingresa una descripción</label>
+                  <textarea class="form-control" rows="2" [(ngModel)]="selectSiniestro.descripcionimagen"
+                    formControlName="descripcionimagen"></textarea>
+                </div>
+                <div class="margin-top col-md-3 col-sm-3">
+                  <button type="button" (click)="agregarImagen(item.idseccion)" class="btn-upload">Guardar</button>
+                </div>
+              </div>
+              <div class="row">
+                <div style="width: 100%;">
+                  <table>
+                    <tbody>
+                      <tr *ngFor="let imga of item.imagenes">
+                        <td>
+
+                          <div class="mobile-table-file">
+                            <div class="container-texto">
+
+                              <div class="row-file">
+                                <div class="row-file-td-2">
+                                  <div class="titulo">Descripción:</div>
+                                  <div class="descripcion">{{imga.descripcion}}</div>
+                                </div>
+                                <div class="row-file-td-2">
+                                  <div class="titulo">Hora:</div>
+                                  <div class="descripcion">{{imga.hora}}</div>
+                                </div>
+                                <div class="row-file-td-3">
+                                    <button type="button" class="mobile-button-ver" (click)="downloadMyFile(imga.idimagen)">Ver mas</button>
+                                    <button *ngIf="isEdit" type="button" class="mobile-button-edit" (click)="EliminarFotoProcuracion(imga.idimagen)">Eliminar</button>
+                                </div>
+
+                              </div>
+
+                            </div>
+                            <!-- <div style="text-align: center">
+                                <button class="mobile-button-ver">Ver</button>
+                                <button class="mobile-button-edit">Editar</button>
+                                <button class="mobile-button-edit">Rechazar</button>
+                              </div> -->
+
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-modal" *ngIf="showCoberturaReserva">
+    <div class="modalc-opacity"></div>
+    <div class="modalc-close" (click)="cerrarModalCoberturaReserva()"></div>
+    <div class="modalc-body">
+      <div class="row">
+        <div style="width: 100%;">
+          <table>
+            <tbody>
+              <tr *ngFor="let item of listReserva">
+                <td>
+
+                  <div class="mobile-table">
+                    <div class="container-texto">
+                      <div class="container-siniestro">
+                        <div class="titulo">Cobertura:</div>
+                        <div class="descripcion">{{ item.smidcobertura}}</div>
+                      </div>
+
+                      <div class="row">
+                        <div class="row-td-1">
+                          <div class="titulo">Cod.Mov o Transacc:</div>
+                          <div class="descripcion">{{item.codTipoTran}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Mov. o Tip. Transacc:</div>
+                          <div class="descripcion">{{item.TipoTran}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Nro. Doc:</div>
+                          <div class="descripcion">{{item.vnro_doc}}{{item.maxAmpliacion}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Proved / Benefic:</div>
+                          <div class="descripcion">{{item.proveedor}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Fecha:</div>
+                          <div class="descripcion">{{item.fechRegistro}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Monto Total Doc:</div>
+                          <div class="descripcion">{{item.dcMontoToal}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Ajuste:</div>
+                          <div class="descripcion">{{item.dcMontoAjuste}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Pago Sin IGV:</div>
+                          <div class="descripcion">{{item.dcMontoTotalSinIgv}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Pago Total:</div>
+                          <div class="descripcion">{{item.dcMontoPagadoTotal}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Reserva:</div>
+                          <div class="descripcion">{{item.dcMontoReserva}}</div>
+                        </div>
+                        <div class="row-td-1">
+                          <div class="titulo">Saldo:</div>
+                          <div class="descripcion">{{item.saldoCobertura}}</div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-modal" *ngIf="showCobertura">
+    <div class="modalc-opacity"></div>
+    <div class="modalc-close" (click)="cerrarModalCobertura()"></div>
+    <div class="modalc-body">
+        <form [formGroup]="coberturaModalForm">
+          <div class="row">
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="smcausageneral" class="form-label">Cobertura General</label>
+              <select class="form-control" formControlName="smcausageneral" [(ngModel)]="selectSiniestro.smcausageneral" (change)="onChangeCoberturaGeneral($event)">
+                <option *ngFor="let item of listCoberturaModalGeneral" [value]="item.smcobgeneral">{{item.vdescripcion}}</option>
+              </select>
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="smcausades" class="form-label">Causa</label>
+              <input type="text" class="form-control" [(ngModel)]="selectSiniestro.smcausades" formControlName="smcausades" readonly="true">
+            </div>
+            <div class="margin-top col-md-3 col-sm-3 inline">
+              <label for="iddetalledes" class="form-label">Detalle Causa</label>
+              <input type="text" class="form-control" [(ngModel)]="selectSiniestro.iddetalledes" formControlName="iddetalledes" readonly="true">
+            </div>
+          </div>
+        </form>
+        <div class="page mobile-body">
+          <div class="container-tabs">
+            <div class="tabs" [class.no-active]="!evaluarCoberturaModalTabActivo(1)" (click)="establecerCoberturaModalTabActivo(1)">Persona</div>
+            <div class="tabs no-active" [class.no-active]="!evaluarCoberturaModalTabActivo(2)" (click)="establecerCoberturaModalTabActivo(2)">Vehiculo Asegurado</div>
+            <div class="tabs no-active" [class.no-active]="!evaluarCoberturaModalTabActivo(3)" (click)="establecerCoberturaModalTabActivo(3)">Vehículo Otros</div>
+          </div>
+          <div class="container-tabs-body">
+            <div class="tab-body-1" *ngIf="evaluarCoberturaModalTabActivo(1)">
+              <form [formGroup]="coberturaModalTab1Form">
+                <div class="row">
+                  <div class="margin-top col-md-5 col-sm-5 inline">
+                    <label for="personaPC" class="form-label">Persona</label>
+                    <input type="text" class="form-control" formControlName="personaPC" [(ngModel)]="selectSiniestro.personaPC" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-2 col-sm-2 inline">
+                    <label for="chkflagAseguradoP" class="form-label">Asegurado</label>
+                    <input type="checkbox" class="form-control" (change)="onCheckboxChange_Asegurado($event)" [(checked)]="selectSiniestro.flagAsegurado" [disabled]="disabledflagAseguradoP">
+                  </div>
+                  <div class="margin-top col-md-2 col-sm-2 inline">
+                    <label for="chkflagConductorP" class="form-label">Conductor</label>
+                    <input type="checkbox" class="form-control" (change)="onCheckboxChange_Conductor($event)" [(checked)]="selectSiniestro.flagConductor" [disabled]="disabledflagAseguradoP">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="fecFallPersonaCob" class="form-label">Fecha Fall</label>
+                    <ion-list class="container-text-date">
+                      <ion-item id="open-fecFallPersonaCob" lines="none">
+                        <input type="text" class="form-control">
+                      </ion-item>
+                      <ion-modal trigger="open-fecFallPersonaCob" [cssClass]="'bottom-end'">
+                        <ng-template>
+                          <ion-datetime formControlName="fecFallPersonaCob"size="cover" [showDefaultButtons]="true"
+                          [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                          </ion-datetime>
+                        </ng-template>
+                      </ion-modal>
+                    </ion-list>
+                  </div>
+                </div>
+                  <div class="row">
+                    <div class="margin-top col-md-3 col-sm-3 inline">
+                      <label for="lugarVehPersonaCob" class="form-label">Lugar Vehículo</label>
+                      <select class="form-control" formControlName="lugarVehPersonaCob">
+                        <option value="">SELECCIONAR</option>
+                        <option *ngFor="let item of listLugarVehiculo" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                      </select>
+                    </div>
+                    <div class="margin-top col-md-3 col-sm-3 inline">
+                      <label for="trasPacientePersonaCob" class="form-label">Traslado Paciente</label>
+                      <select class="form-control" formControlName="trasPacientePersonaCob">
+                        <option value="">SELECCIONAR</option>
+                        <option *ngFor="let item of listTrasladoPaciente" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                      </select>
+                    </div>
+                    <div class="margin-top col-md-3 col-sm-3 inline">
+                      <label for="parentescoPersonaCob" class="form-label">Parentesco</label>
+                      <select class="form-control" formControlName="parentescoPersonaCob">
+                        <option value="">SELECCIONAR</option>
+                        <option *ngFor="let item of listParentescoCob" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                      </select>
+                    </div>
+                    <div class="margin-top col-md-3 col-sm-3 inline">
+                      <label for="costoPerPersonacob" class="form-label">Costo Peritaje</label>
+                      <input type="text" class="form-control" formControlName="costoPerPersonacob">
+                    </div>
+                  </div>
+
+                <div class="row">
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="auditor" class="form-label">Asig. Auditor</label>
+                    <select class="form-control" formControlName="auditor">
+                      <option value="">SELECCIONAR</option>
+                      <option *ngFor="let item of listAsesoresP" [value]="item.nidUsuario">{{item.nombresusu}}</option>
+                    </select>
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="tipMonedaRegP" class="form-label">Tipo Moneda</label>
+                    <select class="form-control" formControlName="tipMonedaRegP">
+                      <option *ngFor="let item of listTipoMoneda" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                    </select>
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="sumaAseguradaP" class="form-label">Suma Asegurada</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.sumaAsegurada" formControlName="sumaAseguradaP" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="deduciminregP" class="form-label">Deducible Mínimo</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.dcminimo" formControlName="deduciminregP" readonly="true">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="deduregP" class="form-label">Deducible</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.porcentajeDedu" formControlName="deduregP" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="reseriniregP" class="form-label">Reserva Inicial</label>
+                    <input type="text" class="form-control" formControlName="reseriniregP">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="estadoPersonaCob" class="form-label">Estado</label>
+                    <select class="form-control" formControlName="estadoPersonaCob">
+                      <option value="">SELECCIONAR</option>
+                      <option *ngFor="let item of listEstadoSiniestro" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row" *ngIf="visibleObservacionesCober">
+                  <div class="margin-top col-md-12 col-sm-12">
+                    <label for="observacionesCober" class="form-label">Observaciones</label>
+                    <textarea class="form-control" formControlName="observacionesCober" rows="5"></textarea>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+            <div class="tab-body-2" *ngIf="evaluarCoberturaModalTabActivo(2)">
+              <form [formGroup]="coberturaModalTab2Form">
+                <div class="row">
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Placa</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.placa" formControlName="placa" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Marca</label>
+                    <input type="text" class="form-control" formControlName="Marca" [(ngModel)]="selectSiniestro.Marca" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" formControlName="Modelo" [(ngModel)]="selectSiniestro.Modelo" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Año</label>
+                    <input type="text" class="form-control" formControlName="Anio" [(ngModel)]="selectSiniestro.Anio" readonly="true">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="Moneda" class="form-label">Tipo Moneda</label>
+                    <select class="form-control" formControlName="Moneda" readonly="true" [(ngModel)]="selectSiniestro.Moneda">
+                      <option *ngFor="let item of listTipoMoneda" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                    </select>
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Suma Asegurada</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.sumaAsegurada" formControlName="sumaAsegurada" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Deducible Multiple</label>
+                    <select class="form-control" formControlName="iddeduciblemulti" [(ngModel)]="selectSiniestro.smcausa" (change)="onChangeDedicible_Multiple($event)">
+                      <option *ngFor="let item of listDeducibleMultiple" [value]="item.smiddeducible">{{item.vdescripcion}}</option>
+                    </select>
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Deducible Mínimo</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.dcminimo" formControlName="dcminimo" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Deducible</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.porcentajeDedu" formControlName="porcentajeDedu" readonly="true">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Reserva Inicial</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectSiniestro.reserinireg" formControlName="reserinireg" [readonly]="readOnlyReservaInicial">
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline">
+                    <label for="plaque" class="form-label">Estado</label>
+                    <select class="form-control" formControlName="estadocob" [(ngModel)]="selectSiniestro.estadocob">
+                      <option *ngFor="let item of listEstadoSiniestro" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
+                    </select>
+                  </div>
+                  <div class="margin-top col-md-3 col-sm-3 inline" *ngIf="visiblePerdidaTotal">
+                    <label for="plaque" class="form-label">Perdida Total</label>
+                    <input type="checkbox" class="form-control" (change)="onCheckboxChange_PerdidaTotal($event)" [(value)]="selectSiniestro.perdidaTotal">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="tab-body-3" *ngIf="evaluarCoberturaModalTabActivo(3)">
+              <form [formGroup]="coberturaModalTab3Form">
+                <div class="row">
+
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <button type="button"class="input-button" (click)="CloseCobertura()">
+          Cerrar
+        </button>
+
+        <button type="button"class="input-button">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

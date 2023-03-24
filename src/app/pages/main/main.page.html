@@ -1,0 +1,82 @@
+ <!-- <div class="loading-holder" *ngIf="loading">
+  <div class="spinner-holder" *ngIf="loading">
+    <lottie-animation-view
+      [options]="lottieConfig"
+      [width]="lottieWidth"
+      [height]="lottieHeight">
+    </lottie-animation-view>
+  </div>
+</div> -->
+<!-- <ion-split-pane  when="(min-width: 769px)"> -->
+  <ion-app>
+<ion-split-pane contentId="menuContent" when="(min-width: 1500px)">
+  <ion-menu contentId="menuContent" side="end" type="overlay">
+      <ion-content >
+        <div class="fake-shadow"></div>
+        <div class="user-menu">
+          
+            <h2 class="greetings">{{ userInformation ? '¡Hola ' + userInformation.names + '!' : '' }}</h2> 
+          <h2 class="greetings">{{userdatos.nomusuario}}</h2>
+        </div>
+        <ion-list class="menu main-menu" lines="none">
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let menuButton of menuButtons" [ngClass]="[menuButton.class]">
+            <ion-item [ngClass]="menuButton.icon == 'i-menu-points' ? 'divider' : ''" *ngIf="menuButton.show">
+              <!-- <div class="mobile-action-icons">
+                <div class="{{ menuButton.icon }}"></div>
+              </div>
+              <button class="section-button menu-button" (click)="navigateToRoute(menuButton.route, menuButton.dataLayer.datalayer)" [ngClass]="[menuButton.icon]"  [class.active]="currentRoute === menuButton.route">
+                {{ menuButton.title }}
+              </button> -->
+              <div class="mobile-action" (click)="navigateToRoute(menuButton.route)">
+                <div class="mobile-action-icons">
+                  <div class="{{ menuButton.icon }}"></div>
+                </div>
+                <div class="mobile-action-text">
+                  <span class="action-title">{{ menuButton.title }}</span><br>
+                  <span class="action-subtitle">{{ menuButton.subtitle }}</span>
+                </div>
+                <div class="mobile-action-flecha"></div>
+              </div>               
+            </ion-item>
+          </ion-menu-toggle>                        
+        </ion-list>
+      </ion-content>
+      <div class="logout-container">
+        <button class="logout-button" (click)="openSignoutModal()">
+          <span class="logout-text">Cerrar sesión</span>
+          <span class="i-logout-white"></span>
+        </button>
+      </div>
+    </ion-menu>
+   <ion-router-outlet id="menuContent" main></ion-router-outlet>
+</ion-split-pane> 
+
+  <!-- <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>Inbox</ion-list-header>
+          <ion-note>hi@ionicframework.com</ion-note>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+        <ion-list id="labels-list">
+          <ion-list-header>Labels</ion-list-header>
+
+          <ion-item *ngFor="let label of labels" lines="none">
+            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+            <ion-label>{{ label }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane> -->
+</ion-app>

@@ -1,0 +1,107 @@
+<ion-content>
+<div class="mobile-header">
+  <div class="mobile-sub-header">
+    <div class="mobile-sub-header-back">
+      <button slot="start" class="i-back" (click)="goBack()">       
+      </button>
+    </div>
+    <div class="mobile-sub-header-title">
+      <span>Comisarias</span>
+    </div>
+  </div>
+  <form [formGroup]="filterForm">
+    <div class="row">
+      <div class="buscador-container-inputs" >                    
+        <div class="mobile-action-text">
+          <div class="mobile-text">Comisaria</div>
+          <input type="text"  formControlName="comisaria">
+        </div>
+      </div>               
+      <div class="buscador-container-inputs" >          
+        <div class="mobile-action-button">
+          <input type="button" value="Buscar" (click)="list()">
+        </div>
+      </div>              
+    </div>
+  </form>
+</div>
+<div class="page mobile-body">
+  <table class="">
+    <tbody>
+      <tr *ngFor="let comisaria of listcomisarias">
+        <td>
+          <div class="mobile-table">
+            <div class="container-texto">
+              <div class="container-nombre">
+                  <div class="titulo">Comisaría:</div>
+                <div class="descripcion">{{comisaria.vdescripcion}}</div>
+              </div>            
+              <div class="container-direccion">
+                <div class="titulo">Dirección:</div>
+                <div class="descripcion">{{comisaria.vdireccion}}</div>
+              </div>
+              <div class="container-telefono">
+                <div class="titulo">Teléfono:</div>
+                <div class="descripcion">{{comisaria.vtelefono}}</div>
+              </div>
+            </div>
+            <div style="text-align: center">
+              <button class="mobile-button-ver"  (click)="editarComisaria(false,comisaria)">Ver</button>
+              <button class="mobile-button-edit" (click)="editarComisaria(true,comisaria)">Editar</button>            
+            </div>
+          </div>
+        </td>
+
+
+        <!-- <td>
+          <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2"
+            style="width: 20px">
+          {{ country.name }}
+        </td>
+        <td>{{ country.area | number }}</td>
+        <td>{{ country.population | number }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+  
+
+</div>  
+  <div class="custom-modal" *ngIf="showModal" >
+    <div class="modalc-opacity"></div>
+    <div class="modalc-close" (click)="cerrarComisaria()"></div>
+    <div class="modalc-body">
+      <form [formGroup]="comisariaForm">
+        <div class="row">
+          <div class="margin-top col-md-6 col-sm-6">
+            <label for="plaque" class="form-label">Nombre<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" autocomplete="off" [(ngModel)]="comisaria.vdescripcion" formControlName="vdescripcion" [readonly]="!isEdit">
+          </div>
+          <div class="margin-top col-md-6 col-sm-6">
+            <label for="plaque" class="form-label">Dirección<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" autocomplete="off" [(ngModel)]="comisaria.vdireccion" formControlName="vdireccion" [readonly]="!isEdit">
+          </div>
+          <div class="margin-top col-md-6 col-sm-6">
+            <label for="plaque" class="form-label">Ubigeo<span class="text-danger">*</span></label>
+            <!-- <ion-searchbar placeholder="Ubigeo" [showCancelButton]="never" (ionInput)="getUbigeo($event)" [(ngModel)]="comisaria.vubigeo"  formControlName="vubigeo" [readonly]="!isEdit" [disabled]="true"></ion-searchbar> -->
+            <input type="text" class="form-control" autocomplete="off" (keyup)="getUbigeo($event)" [(ngModel)]="comisaria.vubigeo" formControlName="vubigeo" [readonly]="!isEdit">
+            <ion-list *ngIf="visiblelist" class="ion-list-custom">
+              <ion-item *ngFor="let item of ubigeo" tappable  (click)="setUbigeo(item)">
+                {{ item.vdescripcion }}
+              </ion-item>
+            </ion-list>
+          </div>            
+          <div class="margin-top col-md-6 col-sm-6">
+            <label for="plaque" class="form-label">Telefono<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" autocomplete="off" [(ngModel)]="comisaria.vtelefono" formControlName="vtelefono" [readonly]="!isEdit">
+          </div>        
+        </div>
+        <div class="row">
+          
+          <button type="button"class="input-button" (click)="ActualizarComisaria()">
+            Guardar
+          </button>  
+        </div>
+      </form>
+  </div>
+</div>
+</ion-content>

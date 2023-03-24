@@ -1,0 +1,86 @@
+<ion-backdrop *ngIf="isActiveModal" class="backdrop" [tappable]="enableBackdropDismiss" [class.slide-out-backdrop]="fadeOut"></ion-backdrop>
+<button class="modal-close i-close" (click)="dismissModal()" *ngIf="showCloseButton"></button>
+
+<div class="modal">
+  <div class="scrollable-content">
+    <form [formGroup]="frmGeneral">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 inline">
+          <label for="plaque" class="form-label">Cobertura General</label>
+          <select class="form-control" formControlName="smcausa" [(ngModel)]="selectSiniestro.smcausa">
+            <option *ngFor="let item of listCoberturaGeneral" [value]="item.smcobgeneral">{{item.vdescripcion}}</option>
+          </select>
+        </div>
+        <div class="col-md-3 col-sm-3 inline">
+          <label for="plaque" class="form-label">Causa</label>
+          <input type="text" class="form-control" [(ngModel)]="selectSiniestro.smcausades" formControlName="smcausades" readonly="true">
+        </div>
+        <div class="col-md-3 col-sm-3 inline">
+          <label for="plaque" class="form-label">Detalle Causa</label>
+          <input type="text" class="form-control" [(ngModel)]="selectSiniestro.iddetalledes" formControlName="iddetalledes" readonly="true">
+        </div>
+      </div>
+    </form>
+    <div class="page mobile-body">
+      <div class="container-tabs">
+        <div class="tabs" [class.no-active]="!evaluarActivo(1)" (click)="establecerActivo(1)">Persona</div>
+        <div class="tabs no-active" [class.no-active]="!evaluarActivo(2)" (click)="establecerActivo(2)">Vehiculo Asegurado</div>
+        <div class="tabs no-active" [class.no-active]="!evaluarActivo(3)" (click)="establecerActivo(3)">Vehículo Otros</div>
+      </div>
+      <div class="container-tabs-body">
+        <div class="tab-body-1" *ngIf="evaluarActivo(1)">
+          <form [formGroup]="tab1Form">
+            <div class="row">
+
+            </div>
+          </form>
+        </div>
+        <div class="tab-body-2" *ngIf="evaluarActivo(2)">
+          <form [formGroup]="tab2Form">
+            <div class="row">
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Placa</label>
+                <input type="text" class="form-control" [(ngModel)]="selectSiniestro.placa" formControlName="placa" readonly="true">
+              </div>
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Marca</label>
+                <input type="text" class="form-control" formControlName="Marca" [(ngModel)]="selectSiniestro.Marca" readonly="true">
+              </div>
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Modelo</label>
+                <input type="text" class="form-control" formControlName="Modelo" [(ngModel)]="selectSiniestro.Modelo" readonly="true">
+              </div>
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Año</label>
+                <input type="text" class="form-control" formControlName="Anio" [(ngModel)]="selectSiniestro.Anio" readonly="true">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Tipo Moneda</label>
+                <input type="text" class="form-control" [(ngModel)]="selectSiniestro.Moneda" formControlName="Moneda" readonly="true">
+              </div>
+              <div class="col-md-3 col-sm-3 inline">
+                <label for="plaque" class="form-label">Suma Asegurada</label>
+                <input type="text" class="form-control" [(ngModel)]="selectSiniestro.sumaAsegurada" formControlName="sumaAsegurada" readonly="true">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-body-3" *ngIf="evaluarActivo(3)">
+          <form [formGroup]="tab3Form">
+            <div class="row">
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="title"></div>
+    <div class="message"></div> -->
+    <div class="buttons-container">
+      <button class="brand-button primary" *ngIf="primaryButtonText" [class.fill]="!secondaryButtonText" (click)="onPrimaryClick()">{{primaryButtonText}}</button>
+      <button #secondButton class="brand-button secondary {{extraClass2}}" (click)="onSecondaryClick()" *ngIf="secondaryButtonText">{{secondaryButtonText}}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+.container-header{
+    margin-top: 20px;
+    margin-left: 15px;
+    // @media only screen and (orientation: landscape) {
+    //     margin-top: 20px;
+    // }    
+    .profile-icon{
+        width: 48px;
+        height: 48px;
+        background: #A5E6FF;
+        box-sizing: border-box;
+        text-overflow: ellipsis;
+        border-radius: 25px;
+        float: left;
+        .icon{
+            background-image: url(../../../assets/icon/profile-home.png);
+            width: 22px;
+            height: 22px;
+            margin: 13px
+        }
+    }   
+    .profile-text{
+        margin-left: 10px;
+        float: left;
+        .greeting{
+            font-family: "Gilroy-Light", sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .name{
+            font-family: "Gilroy-Light", sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .profile{
+            font-family: "Gilroy-Light", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+    } 
+}
+
+
+.i-menu{
+    margin-right: 15px;
+    // @media only screen and (orientation: landscape) {
+    //     margin-top: 0px;
+    // }
+}
+
+.login-flechas{
+    width: 40px;
+    height: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 22px;
+    background-image: url(../../../assets/icon/logo-flechas-abajo.png);      
+  }
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+.mobile-action{
+    width: 327px;
+    height: 100px;
+    margin-top: 33px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #F3F5F8;
+    border-radius: 22px;
+    overflow: hidden;
+    //display: table;
+}
+
+.mobile-action-icons{
+    margin-top: 6px;
+    margin-left: 6px;    
+    width: 88px;
+    height: 88px;
+    left: 30px;
+    top: 246px;
+    background: #00ADEF;
+    border-radius: 18px;
+    float: left;
+}
+
+.mobile-action-text{
+    margin-top: 31px;
+    float: left;
+    margin-left: 22px;
+}
+
+.action-title{
+    font-family: "Gilroy-Light", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+}
+
+.action-subtitle{
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #777777;
+}
+
+.mobile-action-flecha{
+    background-image: url(../../../assets/icon/icono_flecha_derecha.png);
+    float: right;
+    width: 6px;
+    height: 12px;
+    margin-top: 45px;
+    margin-right: 25px;
+    
+}
+.i-menu-siniestro{
+    background-image: url(../../../assets/icon/icono_siniestro.png);
+    width: 52px;
+    height: 28.03px;
+    margin-left: 18px;
+    margin-top: 30px;
+}
+
+.i-menu-inspeccion{
+    background-image: url(../../../assets/icon/icono_siniestro.png);
+    width: 52px;
+    height: 28.03px;
+    margin-left: 18px;
+    margin-top: 30px;
+}
+
+.i-menu-poliza{
+    background-image: url(../../../assets/icon/icono_siniestro.png);
+    width: 52px;
+    height: 28.03px;
+    margin-left: 18px;
+    margin-top: 30px;
+}
+.i-menu-tablas{
+    background-image: url(../../../assets/icon/icono_mantenimiento.png);
+    width: 52px;
+    height: 28.03px;
+    margin-left: 18px;
+    margin-top: 30px;
+}
+ion-header{
+    ion-toolbar {
+      height: 100px;
+      @media only screen and (orientation: landscape) {
+        height: 100px;
+      }
+    }
+  
+  }

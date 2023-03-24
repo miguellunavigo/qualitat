@@ -1,0 +1,49 @@
+ion-segment {
+  ion-segment-button {
+    height: 32px;    
+  }
+
+  ion-label{ 
+    font-family: 'Montserrat Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 24px;
+
+    //
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+
+  }
+  .left-selector {        
+    border-radius: 8px 0px 0px 8px; 
+    width: 50%;    
+  }
+  
+  .right-selector {        
+    border-radius: 0px 8px 8px 0px; 
+    width: 50%;
+  }
+
+  .segment-button-checked {    
+    border: 1px solid var(--color-purple) !important;
+    background-color: var(--color-purple) !important;
+    color: var(--color-white) !important;    
+  }
+
+  ion-segment-button:not(.segment-button-checked) {    
+    border: 1px solid var(--color-purple) !important;
+    background-color: var(--color-white) !important;
+    color: var(--color-purple) !important;    
+  }
+
+
+  
+}
+
+.backgraund {
+  background-color: white;
+  color: #8C4799;
+  margin-top: 15px;
+}

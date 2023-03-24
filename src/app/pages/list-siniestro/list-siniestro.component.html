@@ -1,0 +1,223 @@
+<ion-content>
+  <div class="mobile-header">
+    <div class="mobile-sub-header">
+      <div class="mobile-sub-header-back">
+
+
+        <button slot="start" class="i-back" (click)="goBack()">
+        </button>
+      </div>
+      <div class="mobile-sub-header-title">
+        <span>Siniestros</span>
+      </div>
+    </div>
+    <form [formGroup]="filterForm">
+      <div class="row">
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Siniestro</div>
+              <input type="text" name="idsiniestro" formControlName="idsiniestro">
+          </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Póliza</div>
+              <input type="text" name="poliza" formControlName="poliza" >
+          </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Rnv</div>
+              <input type="text" name="icodigorenovacion" formControlName="icodigorenovacion" (keypress)="keyPressNumber($event)">
+          </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+            <div class="mobile-action-text">
+              <div class="mobile-text">OT</div>
+              <input type="text" name="idordenatencion" formControlName="idordenatencion" (keypress)="keyPressNumber($event)">
+          </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Contratante</div>
+            <input type="text" name="nombre" formControlName="nombre">
+           </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Placa</div>
+            <input type="text" name="placa" formControlName="placa">
+           </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Semáforo</div>
+            <select formControlName="idsemaforo">
+              <option value="">SELECCIONE</option>
+              <option value="1">VERDE</option>
+              <option value="2">AMARILLO</option>
+              <option value="3">ROJO</option>
+            </select>
+           </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Fecha Inicio</div>
+            <ion-list class="container-text-date">
+              <ion-item id="open-modal1" >
+                <input type="text" value="{{fechaini | date:'dd/MM/yyyy'}}">
+              </ion-item>
+              <ion-modal trigger="open-modal1" [cssClass]="'bottom-end'">
+                <ng-template>
+                  <ion-datetime #datetimeini presentation="date"
+                    [(ngModel)]="fechaini" formControlName="fechaini" size="cover" [showClearButton]="true" locale="es-ES"
+                      [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                  </ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-list>
+           </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Fecha Fin</div>
+              <ion-list class="container-text-date">
+                <ion-item id="open-modal2" >
+                  <input type="text" value="{{fechafin | date:'dd/MM/yyyy'}}">
+                </ion-item>
+                <ion-modal trigger="open-modal2" [cssClass]="'bottom-end'">
+                  <ng-template>
+                    <ion-datetime #datetimefin
+                      presentation="date"
+                      [(ngModel)]="fechafin" formControlName="fechafin"
+                      size="cover" [showClearButton]="true" locale="es-ES"
+                      [showDefaultButtons]="true"
+                      doneText="Seleccionar"
+                      clearText="Limpiar"
+                      cancelText="Cerrar"
+                      >                      
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-list>
+           </div>
+        </div>
+
+
+        <!-- <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Fecha Ini Vig</div>
+            <input type="date" name="fechafinvig" formControlName="fechafinvig">
+
+            <div class="datepicker date input-group">
+              <input type="text" class="form-control fecha"
+                       formControlName="fechafinvig"
+                      ngbDatepicker #dtfechafinvig="ngbDatepicker" (click)="dtddeliverydatedocuments.toggle()">
+              <div class="input-group-append">
+                  <span class="input-group-text px-2"><i class="la la-calendar-o" style="line-height: 1px;"></i></span>
+              </div>
+            </div>
+
+
+
+
+
+           </div>
+        </div>
+
+        <div class="buscador-container-inputs">
+          <div class="mobile-action-text">
+            <div class="mobile-text">Fecha Fin Vig</div>
+            <input type="date" name="fechafinvig" formControlName="fechafinvig">
+
+           </div>
+        </div>
+ -->
+
+          <div class="buscador-container-inputs">
+            <div class="mobile-action-button">
+              <input type="button" value="Buscar" (click)="lista()">
+            </div>
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="page mobile-body">
+    <table class="">
+
+      <!-- <thead>
+      <tr>
+
+        <th scope="col">Country</th>
+        <th scope="col">Area</th>
+        <th scope="col">Population</th>
+      </tr>
+    </thead> -->
+      <tbody>
+        <tr *ngFor="let siniestro of listSiniestros">
+          <td>
+            <div class="mobile-table">
+              <div class="container-texto">
+                <div class="container-siniestro">
+                  <div class="titulo">Siniestro:</div>
+                  <div class="descripcion">{{ siniestro.idsiniestro_ou}}</div>
+                </div>
+
+                <div class="row">
+                  <div class="row-td-1">
+                    <div class="titulo">Póliza:</div>
+                    <div class="descripcion">{{siniestro.idpoliza}}</div>
+                  </div>
+                  <div class="row-td-1">
+                    <div class="titulo">Placa:</div>
+                    <div class="descripcion">{{siniestro.vplaca}}</div>
+                  </div>
+                  <div class="row-td-1">
+                    <div class="titulo">Plan:</div>
+                    <div class="descripcion">{{siniestro.planPoliza}}</div>
+                  </div>
+                  <div class="row-td-1">
+                    <div class="titulo">Fecha registro:</div>
+                    <div class="descripcion">{{siniestro.dFecRegistro}}</div>
+                  </div>
+                  <div class="row-td-1">
+                    <div class="titulo">Estado Siniestro:</div>
+                    <div class="descripcion">{{siniestro.Estado}}</div>
+                  </div>
+                  <div class="row-td-1">
+                    <div class="titulo">Semaforo:</div>
+                    <div class="descripcion">{{siniestro.semaforo}}</div>
+                  </div>
+                  <div class="row-td-2">
+                    <div class="titulo">Contratante:</div>
+                    <div class="descripcion">{{siniestro.Persona}}</div>
+                  </div>
+                  <div class="row-td-2">
+                    <div class="titulo">Analista:</div>
+                    <div class="descripcion">{{siniestro.analista}}</div>
+                  </div>
+                </div>
+
+              </div>
+              <div style="text-align: center">
+                <button class="mobile-button-ver"  (click)="modSiniestro(false,siniestro.idsiniestro.toString(),siniestro.icodigorenovacion)">Ver</button>
+                <button class="mobile-button-edit" (click)="modSiniestro(true,siniestro.idsiniestro.toString(),siniestro.icodigorenovacion)">Editar</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+</ion-content>

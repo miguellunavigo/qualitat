@@ -1,0 +1,139 @@
+ion-content{  
+  .login-view {  
+      height: 100vh;  
+      background-image: linear-gradient(272deg, #00ADEF 2.32%, #A5E6FF 133.7%);
+      //padding-top: 148px;
+      padding-top: 70px;
+      @media only screen and (orientation: landscape) {
+        height: fit-content;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      .login-logo{
+        width: 240px;
+        height: 69.54px;
+        margin-left: auto;
+        margin-right: auto;      
+        background-image: url(../../../assets/icon/logo-qualitat.png);
+        @media only screen and (orientation: landscape) {
+          //display: none;
+        }
+      }
+      .login-bienvenida {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 77.46px;
+        text-align: center;
+        color: #FFFFFF;
+        font-family: 'Gilroy-Light', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 25px;    
+        @media only screen and (orientation: landscape) {
+          margin-top: 10px;
+        }
+      }
+      .login-bienvenida span {
+        font-weight: bold;
+      }
+    
+      .login-flechas{
+        width: 40px;
+        height: 68px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 22px;
+        background-image: url(../../../assets/icon/logo-flechas-abajo.png);      
+      }
+    
+      .login-container-inputs {
+        width: 340px;
+        height: 352px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 11px;    
+        padding-top: 28px;
+        background: linear-gradient(180deg, #FEFEFE 23.87%, #F7F7F7 104.76%);
+        border-radius: 39px;
+        position: relative;
+      }
+
+      .span-error-password{
+        margin-left: auto;
+        margin-right: auto;
+        color: red;
+        font-family: "Gilroy-Light", sans-serif;
+        text-align: center;
+        font-style: normal;
+        font-weight: bold;
+        width: 295px;
+        height: 60px;
+      }
+
+      .login-container-inputs .input-user,.input-password,.input-perfiles{ 
+          width: 295px;
+          height: 60px;
+          background: #E7EBF1;
+          border-radius: 42px;
+          margin-left: auto;
+          margin-right: auto;
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin-bottom: 17px;
+          input, select{
+            border: none;
+            font-family: "Gilroy-Light", sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            width: 295px;
+            height: 60px;
+            background: #E7EBF1;
+            // opacity: 0.5;
+            border-radius: 42px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 55px;
+            color: black;
+        }
+        .img-user {
+          z-index: 999;
+          margin-left: 24px;
+          float: left;
+          position: absolute;    
+          content: url(../../../assets/icon/profile-login.png);
+        }
+        .img-password {
+          z-index: 999;
+          margin-left: 24px;
+          float: left;
+          position: absolute;
+          content: url(../../../assets/icon/lock.png);
+      }
+    }
+ 
+    .input-button{
+      display: block;
+      margin-top: 62px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 295px;
+      height: 56px;
+      background: #0F0E0F;
+      border-radius: 30px;
+      color: #FFFFFF;
+      font-family: "Gilroy-Light", sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      left: 0;
+      margin-bottom: 27px;    
+    }  
+  }
+}

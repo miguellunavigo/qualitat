@@ -1,0 +1,7 @@
+{
+  "name": "app-gestion-siniestros",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

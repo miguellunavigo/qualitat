@@ -1,0 +1,98 @@
+
+
+// ion-header{
+//   position: relative;
+//   z-index: 100;
+//   ion-toolbar {
+//     --min-height: 64px;
+//     height: 64px;
+//     padding-top: 0;
+//     padding-top: env(safe-area-inset-top);
+//     // @media only screen and (max-width: 768px) {
+//     //   --min-height: 48px;
+//     //   height: calc(48px + env(safe-area-inset-top));
+//     //   border-bottom: 1px solid var(--color-lines-grey);
+//     // }
+//   } 
+//   .logo {
+//     width: 143px;
+//     height: 33px;
+//     margin: 5px 0 0 24px;
+//     background-size: auto 33px;
+//     background-repeat: no-repeat;
+//     // @media only screen and (max-width: 768px) {
+//     //   margin: 0 auto;
+//     //   background-size: auto 29px;
+//     //   background-position: 30px;
+//     //   padding-left: 24px;
+//     //   width: 156px;
+//     // }
+//   }
+//   .i-back {
+//     box-shadow: none;
+//     background-color: transparent;
+//     background-position: center;
+//     width: 32px;
+//     height: 32px;
+//     margin-right: 10px;
+//     &:focus {
+//       outline: none;
+//     }
+//   }
+//   .title {
+//     font: 15px var(--ion-font-family-semibold);
+//     color: var(--color-purple);
+//     padding-right: 50px;
+//     padding-left: 50px;
+//   }
+//   .open-account-title{
+//     padding: 0 10%;
+//     @media (max-width: 375px){
+//       font: 13px var(--ion-font-family-semibold);
+//     }
+//     @media (max-width: 320px){
+//       padding: 0 15%;
+//     }
+//   }
+//   .simulator-title{
+//     @media (max-width: 425px){
+//       padding: 0 15%;
+//     }
+//     @media (max-width: 375px){
+//       font-size: 13px;
+//     }
+//   }
+//   .simulator-sms-title{
+//     @media (max-width: 425px){
+//       padding: 0 15%;
+//       font-size: 13px;
+//     }
+//   }
+//   .logout{
+//     border-radius: 16px;
+//     background-color: var(--color-bg-purple);
+//     width: 138px;
+//     height: 32px;
+//     box-shadow: none;
+//     padding: 0 18px 0 30px;
+//     font: 12.5px var(--ion-font-family-semibold);
+//     color: var(--color-blue);
+//     margin-right: 10px;
+//     opacity: 0.8;
+//     &:hover{
+//       opacity: 1;
+//     }
+//     &:focus {
+//       outline: none;
+//     }
+//     @media only screen and (max-width: 768px) {
+//       display: none;
+//     }
+//     &.i-logout-purple{
+//       background-position: 15px center;
+//     }
+//   }
+//   ion-menu-button{
+//     color: var(--color-blue);
+//   }
+// }

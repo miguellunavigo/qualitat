@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>54992857958-od3vi58cf8n96losaj69lu7ph7drc7k0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.54992857958-od3vi58cf8n96losaj69lu7ph7drc7k0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCUbFZVDc6qAi0SA9fndGwChUo6cmwQUbQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>54992857958</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.qualitat.genesis.vehicular</string>
+	<key>PROJECT_ID</key>
+	<string>hbk-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hbk-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:54992857958:ios:5e221e5c4104c7e14236a7</string>
+</dict>
+</plist>

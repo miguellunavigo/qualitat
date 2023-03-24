@@ -1,0 +1,30 @@
+<!-- <<ion-header [translucent]="true">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" class="i-back">      
+    </ion-buttons>
+    <ion-menu-button slot="end" class="i-menu"></ion-menu-button>
+    <ion-title>{{ folder }} a</ion-title>
+  </ion-toolbar>
+</ion-header>  -->
+
+<<ion-header>
+  <ion-toolbar mode="ios">
+    <button slot="start" class="i-back"></button>
+      <div class="logo logo-qualitat"></div>
+      <ion-menu-button slot="end" class="i-menu" ></ion-menu-button>
+  </ion-toolbar>
+</ion-header> 
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }} aaaa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong class="capitalize">{{ folder }} c</strong>
+    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+</ion-content>

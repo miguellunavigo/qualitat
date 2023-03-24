@@ -1,0 +1,13 @@
+export const INVALID_CREDENTIALS_CODE = '6';
+export const LOCKED_USER_BY_ADMIN_CODE = '16';
+export const CREATE_TOKEN = 1;
+export const REFRESH_TOKEN = 2;
+export const RESCUE_SESSION_TOKEN = 'rescueSessionToken';
+export const USER_INFO = 'userInfo';
+export const CREATE_TOKEN_PATH = 'connect';
+export const REFRESH_TOKEN_PATH = 'refresh';
+export const RESCUE_TOKEN_EXPIRES = 'rescueTokenExpires';
+export const USER_ID = 'user_id';
+export const SECONDS_TO_MILLISECONDS = 1000;
+export const REFRESH_TOKEN_REQUEST_DIFFERENTIAL = (3 / 4);
+export const INACTIVITY_CLOSED_SESSION_STORAGE_KEY = 'inactivityClosedSession';

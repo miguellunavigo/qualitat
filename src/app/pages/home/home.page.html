@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+
+    <div class="container-header">
+      <div class="profile-icon"><div class="icon"></div></div>
+      <div class="profile-text">
+        <div class="greeting">Hola!</div>
+        <div class="name">{{userdatos.nomusuario}}</div>
+        <div class="profile">{{nomperfil}}</div>
+      </div>
+    </div>
+     
+      <ion-menu-button slot="end" class="i-menu" >
+        <ion-icon src="./assets/icon/i-menu.svg"></ion-icon>
+      </ion-menu-button>
+
+  </ion-toolbar> 
+</ion-header>
+ 
+<div class="login-flechas"></div>
+
+<ion-content class="page mobile-body">    
+    <div class="row">
+      <div class="mobile-action" *ngFor="let homeButton of homeButtons" [routerLink]="homeButton.route">
+        <div class="mobile-action-icons">
+          <div class="{{ homeButton.icon }}"></div>
+        </div>
+        <div class="mobile-action-text">
+          <span class="action-title">{{ homeButton.title }}</span><br>
+          <span class="action-subtitle">{{ homeButton.subtitle }}</span>
+        </div>
+        <div class="mobile-action-flecha"></div>
+      </div>      
+    </div>
+
+</ion-content> 
