@@ -40,6 +40,7 @@
             <div class="margin-top col-md-3 col-sm-3 inline">
               <label for="plaque" class="form-label">Asig. Asesor</label>
               <select [readonly]="!isEdit" class="form-control" formControlName="nidusuario" [(ngModel)]="selectSiniestro.nidusuario" [attr.disabled]="disabled">
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listAsesores" [value]="item.nidUsuario">{{item.nombresusu}}</option>
               </select>
             </div>
@@ -130,14 +131,14 @@
               <label for="plaque" class="form-label">Causa</label>
               <select class="form-control" formControlName="smcausa" [(ngModel)]="selectSiniestro.smcausa"
                 (ngModelChange)="getDetalleCausa($event)">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listCausa" [value]="item.smcausa">{{item.vdescripcion}}</option>
               </select>
             </div>
             <div class="margin-top col-md-3 col-sm-3 inline">
               <label for="plaque" class="form-label">Detalle Causa</label>
               <select class="form-control" formControlName="idetallecausa" [(ngModel)]="selectSiniestro.idetallecausa">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listDetalleCausa" [value]="item.idetallecausa">{{item.vdescripcion}}
                 </option>
               </select>
@@ -146,7 +147,7 @@
               <label for="plaque" class="form-label">Consecuencia</label>
               <select class="form-control" formControlName="idconsecuencia"
                 [(ngModel)]="selectSiniestro.idconsecuencia">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listConsecuencia" [value]="item.idConsecuencia">{{item.vDescripcion}}
                 </option>
               </select>
@@ -168,14 +169,14 @@
             <div class="margin-top col-md-3 col-sm-3 inline">
               <label for="plaque" class="form-label">Analista<span class="text-danger">*</span></label>
               <select class="form-control" formControlName="idanalista" [(ngModel)]="selectSiniestro.idanalista" [style.border]="!tab1Form.controls.idanalista.valid ? '1px solid red' : '1px solid #babfc7'">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listAnalista" [value]="item.nidUsuario">{{item.nombresusu}}</option>
               </select>
             </div>
             <div class="margin-top col-md-3 col-sm-3 inline">
               <label for="plaque" class="form-label">Conv. GxG</label>
               <select class="form-control" formControlName="idaseguradora" [(ngModel)]="selectSiniestro.idaseguradora">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listAseguradora" [value]="item.smidciaseguros">{{item.vdescripcion}}
                 </option>
               </select>
@@ -194,7 +195,7 @@
             <div class="margin-top col-md-3 col-sm-3 inline">
               <label for="plaque" class="form-label">Tipo Declarante</label>
               <select class="form-control" formControlName="idtipo_decla" [(ngModel)]="selectSiniestro.idtipo_decla">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listTipoDeclarante" [value]="item.idTipoDeclarante">{{item.vDescripcion}}
                 </option>
               </select>
@@ -226,7 +227,7 @@
               <label for="plaque" class="form-label">Parentesco</label>
               <select class="form-control" formControlName="iparentaseg_declarante"
                 [(ngModel)]="selectSiniestro.iparentaseg_declarante">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listParentesco" [value]="item.idParentesco">{{item.vDescripcion}}</option>
               </select>
             </div>
@@ -255,7 +256,7 @@
               <label for="plaque" class="form-label">Tipo Documento</label>
               <select class="form-control" formControlName="idtipo_docid_conduc"
                 [(ngModel)]="selectSiniestro.idtipo_docid_conduc">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listTipoDocumento" [value]="item.smiddetalle">{{item.vdescripcion}}</option>
               </select>
             </div>
@@ -279,7 +280,7 @@
               <label for="plaque" class="form-label">Parentesco</label>
               <select class="form-control" formControlName="iparentaseg_conductor"
                 [(ngModel)]="selectSiniestro.iparentaseg_conductor">
-                <option value="">SELECCIONAR</option>
+                <option value="0">SELECCIONAR</option>
                 <option *ngFor="let item of listParentesco" [value]="item.idParentesco">{{item.vDescripcion}}</option>
               </select>
             </div>
@@ -514,14 +515,14 @@
         <form [formGroup]="tab3Form">
           <div class="row">
             <div class="margin-top col-md-12 col-sm-12">
-              <label for="plaque" class="form-label">Información de los hechos</label>
-              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.hechosSiniestros" formControlName="hechosSiniestros" rows="5"></textarea>
+              <label for="plaque" class="form-label">Información de los hechos<span class="text-danger">*</span></label>
+              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.hechosSiniestros" formControlName="hechosSiniestros" rows="5" [style.border]="!tab3Form.controls.hechosSiniestros.valid ? '1px solid red' : '1px solid #babfc7'"></textarea>
             </div>
           </div>
           <div class="row">
             <div class="margin-top col-md-12 col-sm-12">
-              <label for="plaque" class="form-label">Apreciación</label>
-              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.apreciacionSiniestros" formControlName="apreciacionSiniestros" rows="5"></textarea>
+              <label for="plaque" class="form-label">Apreciación<span class="text-danger">*</span></label>
+              <textarea [readonly]="!isEdit" class="form-control" [(ngModel)]="selectDatoSiniestro.apreciacionSiniestros" formControlName="apreciacionSiniestros" rows="5" [style.border]="!tab3Form.controls.apreciacionSiniestros.valid ? '1px solid red' : '1px solid #babfc7'"></textarea>
             </div>
           </div>
           <div class="row">
@@ -541,10 +542,10 @@
               </ion-list>
             </div>
             <div class="margin-top col-md-3 col-sm-3 inline">
-              <label for="dfechaInicioProc" class="form-label">Fecha Inicio</label>
+              <label for="dfechaInicioProc" class="form-label">Fecha Inicio<span class="text-danger">*</span></label>
               <ion-list class="container-text-date">
                 <ion-item id="open-dfechaInicioProc" lines="none">
-                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaInicioProc | date:'dd/MM/yyyy HH:mm'}}">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaInicioProc | date:'dd/MM/yyyy HH:mm'}}" [style.border]="!tab3Form.controls.dfechaInicioProc.valid ? '1px solid red' : '1px solid #babfc7'">
                 </ion-item>
                 <ion-modal trigger="open-dfechaInicioProc" [cssClass]="'bottom-end'">
                   <ng-template>
@@ -556,10 +557,10 @@
               </ion-list>
             </div>
             <div class="margin-top col-md-3 col-sm-3 inline">
-              <label for="dfechaFinProc" class="form-label">Fecha Fin</label>
+              <label for="dfechaFinProc" class="form-label">Fecha Fin<span class="text-danger">*</span></label>
               <ion-list class="container-text-date">
                 <ion-item id="open-dfechaFinProc" lines="none">
-                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaFinProc | date:'dd/MM/yyyy HH:mm'}}">
+                  <input [readonly]="!isEdit" type="text" class="form-control" value="{{selectSiniestro.dfechaFinProc | date:'dd/MM/yyyy HH:mm'}}" [style.border]="!tab3Form.controls.dfechaFinProc.valid ? '1px solid red' : '1px solid #babfc7'">
                 </ion-item>
                 <ion-modal trigger="open-dfechaFinProc" [cssClass]="'bottom-end'">
                   <ng-template>
@@ -592,8 +593,8 @@
               </select>
             </div>
             <div class="margin-top col-md-3 col-sm-3 inline">
-              <label for="plaque" class="form-label">Tipo Asesoria</label>
-              <select class="form-control" formControlName="dtipoasesoria" [(ngModel)]="selectSiniestro.dtipoasesoria">
+              <label for="plaque" class="form-label">Tipo Asesoria<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="dtipoasesoria" [(ngModel)]="selectSiniestro.dtipoasesoria" [style.border]="!tab3Form.controls.dtipoasesoria.valid ? '1px solid red' : '1px solid #babfc7'">
                 <option value="">SELECCIONAR</option>
                 <option *ngFor="let item of listTipoAsesoria" [value]="item.value">{{item.description}}</option>
               </select>

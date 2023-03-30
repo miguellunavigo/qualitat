@@ -204,14 +204,14 @@ export class ModSiniestroComponent {
     });
 
     this.tab3Form = this.formBuilder.group({
-      hechosSiniestros: new FormControl(''),
-      apreciacionSiniestros: new FormControl(''),
+      hechosSiniestros: new FormControl('', [Validators.required]),
+      apreciacionSiniestros: new FormControl('', [Validators.required]),
       dfechaReporteProc: new FormControl(''),
-      dfechaInicioProc: new FormControl(''),
-      dfechaFinProc: new FormControl(''),
+      dfechaInicioProc: new FormControl('', [Validators.required]),
+      dfechaFinProc: new FormControl('', [Validators.required]),
       dfechaAsignacion: new FormControl(''),
       idprocurador: new FormControl({value:"", disabled: !this.isEdit}),
-      dtipoasesoria: new FormControl({value:"", disabled: !this.isEdit}),
+      dtipoasesoria: new FormControl({value:"", disabled: !this.isEdit}, [Validators.required]),
       dkilometraje: new FormControl(''),
       descripcionimagen: new FormControl(''),
       descripcionseccion: new FormControl(''),
@@ -420,14 +420,12 @@ export class ModSiniestroComponent {
 
       this.selectSiniestro = data[0];
       this.selectSiniestro.descripcionseccion = "";
-      this.tab1Form.get("dFecOcurrencia").setValue(this.selectSiniestro.dFecOcurrencia);      
-      //this.tab1Form.get("dFecDenunciaP").setValue(this.selectSiniestro.dFecDenunciaP);      
-      debugger
-      this.selectSiniestro.dfechaReporteProc=this.selectSiniestro.dfechaReporteProc==""?this.fechaini:this.selectSiniestro.dfechaReporteProc;
-      this.selectSiniestro.dfechaInicioProc=this.selectSiniestro.dfechaInicioProc==""?this.fechaini:this.selectSiniestro.dfechaInicioProc;
-      this.selectSiniestro.dfechaFinProc=this.selectSiniestro.dfechaFinProc==""?this.fechaini:this.selectSiniestro.dfechaFinProc;
-
-      
+      this.tab1Form.get("dFecOcurrencia").setValue(this.selectSiniestro.dFecOcurrencia);         
+      this.selectSiniestro.dfechaReporteProc = this.selectSiniestro.dfechaReporteProc == "" ? this.fechaini : this.selectSiniestro.dfechaReporteProc;
+      this.selectSiniestro.dfechaInicioProc = this.selectSiniestro.dfechaInicioProc == "" ? this.fechaini : this.selectSiniestro.dfechaInicioProc;
+      this.selectSiniestro.dfechaFinProc = this.selectSiniestro.dfechaFinProc == "" ? this.fechaini : this.selectSiniestro.dfechaFinProc;      
+      this.tab3Form.get("dfechaInicioProc").setValue(this.selectSiniestro.dfechaInicioProc);      
+      this.tab3Form.get("dfechaFinProc").setValue(this.selectSiniestro.dfechaFinProc);                  
     });
   }
 
@@ -488,9 +486,42 @@ export class ModSiniestroComponent {
     //  });
   }
 
+  async reportePDF(oginInfo: ISelectSiniestro) {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'bubbles',
+      message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
+    });
+    loading.present();
+
+    window.open(environment.BASE_BACKEND_WORKER + "/Services/PDF_ReporteSiniestro?idsiniestro=" + this.selectSiniestro.idsiniestro);
+
+    //this.selectedSiniestro = JSON.parse(sessionStorage.getItem('selectedSiniestro'));
+    //this.http.get(environment.BASE_BACKEND_WORKER + "/Services/PDF_ReporteSiniestro?idsiniestro=" + this.selectSiniestro.idsiniestro, { responseType: 'blob' }).subscribe(blob => {
+      loading.dismiss();
+      // saveAs(blob,"RepSiniestro_"+this.selectSiniestro.idsiniestro+".pdf");
+      //});
+  }
+
+  cerrartab1(loginInfo: ISelectSiniestro) {
+    this.location.back();
+  }
+
+  async PDFProcuracion(oginInfo: ISelectSiniestro) {   
+    const loading = await this.loadingCtrl.create({
+      spinner: 'bubbles',
+      message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
+    });
+    loading.present();
+    window.open(environment.BASE_BACKEND_WORKER + "/Services/PDFProcuracion?idsiniestro=" + this.selectSiniestro.idsiniestro);
+    // this.selectedSiniestro = JSON.parse(sessionStorage.getItem('selectedSiniestro'));
+    // this.http.get(environment.BASE_BACKEND_WORKER + "/Services/PDFProcuracion?idsiniestro=" + this.selectSiniestro.idsiniestro, { responseType: 'blob' }).subscribe(blob => {
+      loading.dismiss();
+      //  saveAs(blob,"Procuracion"+this.selectSiniestro.idsiniestro+".pdf");
+      // });
+  }
+
   async actualizartab1() {  
-    if (this.tab1Form.valid){
-  
+    if (this.tab1Form.valid){  
       const loading = await this.loadingCtrl.create({
         spinner: 'bubbles',
         message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
@@ -718,74 +749,43 @@ export class ModSiniestroComponent {
     }
   }
 
-  async reportePDF(oginInfo: ISelectSiniestro) {
-    const loading = await this.loadingCtrl.create({
-      spinner: 'bubbles',
-      message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
-    });
-    loading.present();
-
-    window.open(environment.BASE_BACKEND_WORKER + "/Services/PDF_ReporteSiniestro?idsiniestro=" + this.selectSiniestro.idsiniestro);
-
-    //this.selectedSiniestro = JSON.parse(sessionStorage.getItem('selectedSiniestro'));
-    //this.http.get(environment.BASE_BACKEND_WORKER + "/Services/PDF_ReporteSiniestro?idsiniestro=" + this.selectSiniestro.idsiniestro, { responseType: 'blob' }).subscribe(blob => {
-      loading.dismiss();
-      // saveAs(blob,"RepSiniestro_"+this.selectSiniestro.idsiniestro+".pdf");
-      //});
-  }
-
-  cerrartab1(loginInfo: ISelectSiniestro) {
-    this.location.back();
-  }
-
-  async PDFProcuracion(oginInfo: ISelectSiniestro) {   
-    const loading = await this.loadingCtrl.create({
-      spinner: 'bubbles',
-      message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
-    });
-    loading.present();
-    window.open(environment.BASE_BACKEND_WORKER + "/Services/PDFProcuracion?idsiniestro=" + this.selectSiniestro.idsiniestro);
-    // this.selectedSiniestro = JSON.parse(sessionStorage.getItem('selectedSiniestro'));
-    // this.http.get(environment.BASE_BACKEND_WORKER + "/Services/PDFProcuracion?idsiniestro=" + this.selectSiniestro.idsiniestro, { responseType: 'blob' }).subscribe(blob => {
-      loading.dismiss();
-      //  saveAs(blob,"Procuracion"+this.selectSiniestro.idsiniestro+".pdf");
-      // });
-  }
-
   async actualizartab3() {
-    const loading = await this.loadingCtrl.create({
-      spinner: 'bubbles',
-      message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
-    });
-    try {
-      loading.present();
-      debugger
-      var data = await this.siniestroService.ActualizarProcuracion(
-        this.selectSiniestro.idsiniestro,
-        this.selectDatoSiniestro.hechosSiniestros,
-        this.selectDatoSiniestro.apreciacionSiniestros,
-        this.datepipe.transform(this.selectSiniestro.dfechaReporteProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaReporteProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaInicioProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaInicioProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaFinProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaFinProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
-        this.selectSiniestro.dtipoasesoria,
-        this.selectSiniestro.dkilometraje,
-        this.datepipe.transform(this.selectSiniestro.dfechaAsignacion, 'yyyy-MM-dd')||"",//this.selectSiniestro.dFecNotificacion,
-        this.datepipe.transform(this.selectSiniestro.dfechaAsignacion, 'HH:mm')||"",//this.selectSiniestro.dHoraNotificacion,
-        this.selectSiniestro.idprocurador
-      );
-      var respuesta = data[0].respuesta;
-      if (respuesta == "true") {
-        alert("Los datos del Procurador se actualizaron Satisfactoriamente")
-      } else {
-        alert("Hubo un error al actualizar Datos")
-      }
-      loading.dismiss();
-    } catch (error) {
-      loading.dismiss();
-    }  
+    if (this.tab3Form.valid){
+      const loading = await this.loadingCtrl.create({
+        spinner: 'bubbles',
+        message: '<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Actualizando</div>',
+      });
+      try {
+        loading.present();        
+        var data = await this.siniestroService.ActualizarProcuracion(
+          this.selectSiniestro.idsiniestro,
+          this.selectDatoSiniestro.hechosSiniestros,
+          this.selectDatoSiniestro.apreciacionSiniestros,
+          this.datepipe.transform(this.selectSiniestro.dfechaReporteProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaReporteProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaInicioProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaInicioProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaFinProc, 'yyyy-MM-dd'),//this.selectSiniestro.dFecNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaFinProc, 'HH:mm'),//this.selectSiniestro.dHoraNotificacion,
+          this.selectSiniestro.dtipoasesoria,
+          this.selectSiniestro.dkilometraje,
+          this.datepipe.transform(this.selectSiniestro.dfechaAsignacion, 'yyyy-MM-dd')||"",//this.selectSiniestro.dFecNotificacion,
+          this.datepipe.transform(this.selectSiniestro.dfechaAsignacion, 'HH:mm')||"",//this.selectSiniestro.dHoraNotificacion,
+          this.selectSiniestro.idprocurador
+        );
+        var respuesta = data[0].respuesta;
+        if (respuesta == "true") {
+          alert("Los datos del Procurador se actualizaron Satisfactoriamente")
+        } else {
+          alert("Hubo un error al actualizar Datos")
+        }
+        loading.dismiss();
+      } catch (error) {
+        loading.dismiss();
+      }  
+    }else{      
+      alert('Debe completar los datos');
+    }
   }
 
   async actualizartab3Automatico() {
@@ -949,7 +949,7 @@ export class ModSiniestroComponent {
 
   async getComisaria(event: any) {
     this.vcomisarialist = true;
-    this.selectSiniestro.idcomisaria = null;
+    this.selectSiniestro.idcomisaria = "0";
 
     await this.siniestroService.Listar_Comisaria(event.target.value).then(res => {
         this.listComisaria = res;        
@@ -961,8 +961,8 @@ export class ModSiniestroComponent {
     setTimeout(() => {
       if (!this.changeList){
         this.vcomisarialist = false;
-        if (this.selectSiniestro.idcomisaria==null){
-          this.selectSiniestro.descomisaria="";
+        if (this.selectSiniestro.idcomisaria == "0"){
+          this.selectSiniestro.descomisaria ="";
         }
       }  
       this.changeList=false;
