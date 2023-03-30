@@ -421,9 +421,14 @@ export class ModSiniestroComponent {
       this.selectSiniestro = data[0];
       this.selectSiniestro.descripcionseccion = "";
       this.tab1Form.get("dFecOcurrencia").setValue(this.selectSiniestro.dFecOcurrencia);         
-      this.selectSiniestro.dfechaReporteProc = this.selectSiniestro.dfechaReporteProc == "" ? this.fechaini : this.selectSiniestro.dfechaReporteProc;
-      this.selectSiniestro.dfechaInicioProc = this.selectSiniestro.dfechaInicioProc == "" ? this.fechaini : this.selectSiniestro.dfechaInicioProc;
-      this.selectSiniestro.dfechaFinProc = this.selectSiniestro.dfechaFinProc == "" ? this.fechaini : this.selectSiniestro.dfechaFinProc;      
+      
+      this.selectSiniestro.dFecOcurrencia=this.selectSiniestro.dFecOcurrencia.replace(" ","T");
+      this.selectSiniestro.dvencilicencia=this.selectSiniestro.dvencilicencia.replace(" ","T");
+      this.selectSiniestro.dFecDenunciaP=this.selectSiniestro.dFecDenunciaP.replace(" ","T");      
+      
+      this.selectSiniestro.dfechaReporteProc = this.selectSiniestro.dfechaReporteProc == "" ? this.fechaini : this.selectSiniestro.dfechaReporteProc.replace(" ","T");
+      this.selectSiniestro.dfechaInicioProc = this.selectSiniestro.dfechaInicioProc == "" ? this.fechaini : this.selectSiniestro.dfechaInicioProc.replace(" ","T");
+      this.selectSiniestro.dfechaFinProc = this.selectSiniestro.dfechaFinProc == "" ? this.fechaini : this.selectSiniestro.dfechaFinProc.replace(" ","T");      
       this.tab3Form.get("dfechaInicioProc").setValue(this.selectSiniestro.dfechaInicioProc);      
       this.tab3Form.get("dfechaFinProc").setValue(this.selectSiniestro.dfechaFinProc);                  
     });

@@ -121,7 +121,7 @@
                 <ion-modal trigger="open-modal2" [cssClass]="'bottom-end'">
                   <ng-template>
                     <ion-datetime [(ngModel)]="selectSiniestro.dFecOcurrencia" formControlName="dFecOcurrencia" size="cover" [showDefaultButtons]="true"
-                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar" value="selectSiniestro.dFecOcurrencia">
                     </ion-datetime>
                   </ng-template>
                 </ion-modal>
@@ -304,8 +304,8 @@
                 </ion-item>
                 <ion-modal trigger="open-modal3" [cssClass]="'bottom-end'">
                   <ng-template>
-                    <ion-datetime [(ngModel)]="selectSiniestro.dvencilicencia" formControlName="dvencilicencia" size="cover" [showDefaultButtons]="true" max="{{svencilicenciaMaxDate}}"
-                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    <ion-datetime presentation="date" [(ngModel)]="selectSiniestro.dvencilicencia" formControlName="dvencilicencia" size="cover" [showDefaultButtons]="true" max="{{svencilicenciaMaxDate}}"
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar" value="selectSiniestro.dvencilicencia">
                     </ion-datetime>
                   </ng-template>
                 </ion-modal>
@@ -346,7 +346,7 @@
                 <ion-modal trigger="open-modal4" [cssClass]="'bottom-end'">
                   <ng-template>
                     <ion-datetime [(ngModel)]="selectSiniestro.dFecDenunciaP" formControlName="dFecDenunciaP" size="cover" [showDefaultButtons]="true"
-                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar">
+                    [showClearButton]="true" locale="es-ES" [showDefaultButtons]="true" doneText="Seleccionar" clearText="Limpiar" cancelText="Cerrar" value="selectSiniestro.dFecDenunciaP">
                     </ion-datetime>
                   </ng-template>
                 </ion-modal>
